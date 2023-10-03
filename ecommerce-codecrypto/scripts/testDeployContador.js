@@ -1,6 +1,6 @@
 const hre = require("hardhat");
 const { JsonRpcProvider } = require('ethers');
-const addressContrato = "0xa85233c63b9ee964add6f2cffe00fd84eb32338f";
+const addressContrato = "0x5FC8d32690cc91D4c39d9d3abcBD16989F875707";
 
 async function main(){
 
