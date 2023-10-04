@@ -7,13 +7,14 @@
 const hre = require("hardhat");
 
 async function main() {
-  const inicio = 1000;
-  const contador = await hre.ethers.deployContract("Contador", [inicio]);
 
-  await contador.waitForDeployment();
+  
+  const eCommerceCodeCrypto = await hre.ethers.deployContract("ECommerceCodeCrypto");
+
+  await eCommerceCodeCrypto.waitForDeployment();
   
   console.log(
-   `${contador.target}`
+   `${eCommerceCodeCrypto.target}`
   );
 }
 
