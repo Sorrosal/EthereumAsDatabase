@@ -62,11 +62,14 @@ const name = async (req, res) => {
 
   const balanceOf = async (req, res) => {
     try {
-      const balanceOf = await ERC20TokenService.balanceOf();
+      let balance = 0;
+      if(req.params.address) {
+        balance = await ERC20TokenService.balanceOf(req.params.address);
+      }
       
       return res.status(200).send({
         message: "Mensaje enviado desde: controllers/ERC20TokenController.js",
-        balanceOf: balanceOf,
+        balance: balance,
       });
   
     } catch (error) {
@@ -77,7 +80,8 @@ const name = async (req, res) => {
 
   const transfer = async (req, res) => {
     try {
-      const transfer = await ERC20TokenService.transfer();
+      const {addressTo, units} = req.body;
+      const transfer = await ERC20TokenService.transfer(addressTo, units);
       
       return res.status(200).send({
         message: "Mensaje enviado desde: controllers/ERC20TokenController.js",

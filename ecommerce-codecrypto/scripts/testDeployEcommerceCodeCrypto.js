@@ -1,6 +1,6 @@
 const hre = require("hardhat");
 const { JsonRpcProvider } = require('ethers');
-const contractAddress = "0x9A9f2CCfdE556A7E9Ff0848998Aa4a0CFD8863AE";
+const contractAddress = "0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9";
 
 async function main(){
 
@@ -15,8 +15,8 @@ async function main(){
     await eCommerceCodeCrypto.createCustomer('0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC','Customer1');
     await eCommerceCodeCrypto.createCustomer('0x90F79bf6EB2c4f870365E785982E1f101E93b906','Customer2');
 
-    await eCommerceCodeCrypto.createArticle('0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266','Article1',8,'picture1.jpg');
-    await eCommerceCodeCrypto.createArticle('0x70997970C51812dc3A010C7d01b50e0d17dc79C8','Article2',12,'picture2.jpg');
+    await eCommerceCodeCrypto.createArticle('0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266','Article1',8);
+    await eCommerceCodeCrypto.createArticle('0x70997970C51812dc3A010C7d01b50e0d17dc79C8','Article2',12);
 
     await eCommerceCodeCrypto.createInvoice('0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266','0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC',26,'2023-10-04');
     await eCommerceCodeCrypto.createInvoice('0x70997970C51812dc3A010C7d01b50e0d17dc79C8','0x90F79bf6EB2c4f870365E785982E1f101E93b906',345, '2023-10-04');

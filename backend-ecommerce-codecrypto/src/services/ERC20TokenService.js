@@ -2,8 +2,8 @@ const ethers = require('ethers');
 const url = 'http://127.0.0.1:8545/';
 const customHttpProvider = new ethers.JsonRpcProvider(url);
 const signer = new ethers.Wallet("0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80", customHttpProvider);
-const abi = require("../../abi.json");
-const erc20CodeCryptoToken = new ethers.Contract("0x9A9f2CCfdE556A7E9Ff0848998Aa4a0CFD8863AE", abi, signer);
+const abi = require("../../abiToken.json");
+const erc20CodeCryptoToken = new ethers.Contract("0x95401dc811bb5740090279Ba06cfA8fcF6113778", abi, signer);
 
 const name = async() => {
     
@@ -14,47 +14,33 @@ const name = async() => {
 const symbol = async() => {
     
     const symbol = await erc20CodeCryptoToken.symbol();
-    return symbol;
+    return JSON.parse(symbol);
 }
 
 const decimals = async() => {
     
     const decimals = await erc20CodeCryptoToken.decimals();
-    return decimals;
+    return parseInt(decimals);
 }
 
 const totalSupply = async() => {
    
     const totalSupply = await erc20CodeCryptoToken.totalSupply();
-    console.log(`Total Supply including all decimals: ${totalSupply}`);
-    console.log(`Total supply including all decimals comma separated: ${ethers.utils.commify(totalSupply)}`);
-    console.log(`Total Supply in FUN: ${ethers.utils.formatUnits(totalSupply, decimals)}\n`);
-
-    return totalSupply;
+    return parseInt(totalSupply);
 }
 
-const balanceOf = async() => {
-    
-    const signers = await ethers.getSigners();
-    const ownerAddress = signers[0].address;
-    let ownerBalance = await erc20CodeCryptoToken.balanceOf(ownerAddress);
-    console.log(`Contract owner at ${ownerAddress} has a ${symbol} balance of ${ethers.utils.formatUnits(ownerBalance, decimals)}\n`);
+const balanceOf = async(address) => {
 
+    const balance = await erc20CodeCryptoToken.balanceOf(address);
+    return parseInt(balance);
 }
 
-const transfer = async() => {
+const transfer = async(addressTo, units) => {
     
-    // transfer(to, amount)
-    console.log('Initiating a transfer...');
-    const recipientAddress = signers[1].address;
-    const transferAmount = 100000;
-    console.log(`Transferring ${transferAmount} ${symbol} tokens to ${recipientAddress} from ${ownerAddress}`);
-    await erc20CodeCryptoToken.transfer(recipientAddress, ethers.utils.parseUnits(transferAmount.toString(), decimals));
-    console.log('Transfer completed');
-    ownerBalance = await erc20CodeCryptoToken.balanceOf(ownerAddress);
-    console.log(`Balance of owner (${ownerAddress}): ${ethers.utils.formatUnits(ownerBalance, decimals)} ${symbol}`);
-    let recipientBalance = await erc20CodeCryptoToken.balanceOf(recipientAddress);
-    console.log(`Balance of recipient (${recipientAddress}): ${ethers.utils.formatUnits(recipientBalance, decimals)} ${symbol}\n`);
+    const transfer = await erc20CodeCryptoToken.transfer(addressTo, units);
+
+    return transfer;
+
 }
 
 const approve = async() => {

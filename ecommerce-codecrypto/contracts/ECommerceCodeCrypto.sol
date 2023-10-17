@@ -6,17 +6,14 @@ contract ECommerceCodeCrypto {
     Customer[] public customers;
     Enterprise[] public enterprises;
     Article[] public articles;
-    Picture[] public pictures;
     Invoice[] public invoices;
 
     uint nextIdEnterprise = 0;
     uint nextIdCustomer = 0;
     uint nextIdArticle = 0;
-    uint nextIdPicture = 0;
     uint nextIdInvoice = 0;
     
     constructor() {
-        setPicture("0", "0");
     }
     struct Enterprise {
         uint256 id;
@@ -35,14 +32,6 @@ contract ECommerceCodeCrypto {
         address enterpriseAddress;
         string name;
         uint256 price;
-        uint256 idPicture;
-    }
-
-    struct Picture {
-        uint256 id;
-        string hashPicture;
-        string path;
-        
     }
 
     struct Invoice {
@@ -163,8 +152,8 @@ contract ECommerceCodeCrypto {
     }
 
     // ARTICLE //
-    function createArticle (address _enterpriseAddress, string calldata _name, uint256 _price, uint256 _idPicture ) external {
-        articles.push(Article(nextIdArticle,_enterpriseAddress, _name, _price, _idPicture));
+    function createArticle (address _enterpriseAddress, string calldata _name, uint256 _price) external {
+        articles.push(Article(nextIdArticle,_enterpriseAddress, _name, _price));
         nextIdArticle++;
     }
 
@@ -181,38 +170,20 @@ contract ECommerceCodeCrypto {
         revert("Article not found");
     }
 
-    function updateArticle(uint _id, address _enterpriseAddress, string calldata _name, uint256 _price, uint256 _idPicture) public {
+    function updateArticle(uint _id, address _enterpriseAddress, string calldata _name, uint256 _price) public {
         uint index =  findIndexArticle(_id);
             articles[index].enterpriseAddress = _enterpriseAddress;
             articles[index].name = _name;
             articles[index].price = _price;
-            articles[index].idPicture = _idPicture;
     }
     
-   function getArticleById(uint _id) public view returns (uint, address, string memory, uint256, uint256) {
+   function getArticleById(uint _id) public view returns (uint, address, string memory, uint256) {
         uint index = findIndexArticle(_id);
-        return (articles[index].id, articles[index].enterpriseAddress, articles[index].name, articles[index].price, articles[index].idPicture);
+        return (articles[index].id, articles[index].enterpriseAddress, articles[index].name, articles[index].price);
     }
     
     function deleteArticle(uint _id) public {
         uint index = findIndexArticle(_id);
         delete articles[index];
-    }
-
-    function setPicture(string memory _hashPicture, string memory _path) public {
-        pictures.push(Picture({
-            id: nextIdPicture,
-            hashPicture: _hashPicture,
-            path: _path
-        }));
-        ++nextIdPicture;
-    }
-
-    function getHashPicture(uint _idPicture) public view returns (string memory) {
-        return pictures[_idPicture].hashPicture;
-    }
-
-    function getPathPicture(uint _idPicture) public view returns (string memory) {
-        return pictures[_idPicture].path;
     }
 }

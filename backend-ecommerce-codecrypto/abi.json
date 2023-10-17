@@ -1,5 +1,10 @@
 [
   {
+    "inputs": [],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
     "inputs": [
       {
         "internalType": "uint256",
@@ -28,11 +33,6 @@
         "internalType": "uint256",
         "name": "price",
         "type": "uint256"
-      },
-      {
-        "internalType": "string",
-        "name": "picture",
-        "type": "string"
       }
     ],
     "stateMutability": "view",
@@ -54,11 +54,6 @@
         "internalType": "uint256",
         "name": "_price",
         "type": "uint256"
-      },
-      {
-        "internalType": "string",
-        "name": "_picture",
-        "type": "string"
       }
     ],
     "name": "createArticle",
@@ -269,11 +264,6 @@
         "internalType": "uint256",
         "name": "",
         "type": "uint256"
-      },
-      {
-        "internalType": "string",
-        "name": "",
-        "type": "string"
       }
     ],
     "stateMutability": "view",
@@ -304,11 +294,6 @@
             "internalType": "uint256",
             "name": "price",
             "type": "uint256"
-          },
-          {
-            "internalType": "string",
-            "name": "picture",
-            "type": "string"
           }
         ],
         "internalType": "struct ECommerceCodeCrypto.Article[]",
@@ -576,11 +561,6 @@
         "internalType": "uint256",
         "name": "_price",
         "type": "uint256"
-      },
-      {
-        "internalType": "string",
-        "name": "_picture",
-        "type": "string"
       }
     ],
     "name": "updateArticle",

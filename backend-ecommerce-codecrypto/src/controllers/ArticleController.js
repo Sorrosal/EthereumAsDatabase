@@ -3,10 +3,10 @@ const ArticleService = require("../services/ArticleService");
 
 const createArticle = async (req, res) => {
   try{
-    const {enterpriseAddress, name, price, picture} = req.body;
+    const {enterpriseAddress, name, price} = req.body;
     let created;
-    if(enterpriseAddress && name && price && picture) {
-      created = await ArticleService.createArticle(enterpriseAddress,name, price, article);
+    if(enterpriseAddress && name && price) {
+      created = await ArticleService.createArticle(enterpriseAddress,name, price);
     }
 
     return res.status(200).send({
